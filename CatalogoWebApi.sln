@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoWebApi", "CatalogoWebApi\CatalogoWebApi.csproj", "{44A781D6-C1D0-4FC9-83B4-904A8C96712F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{973535B3-14DC-4DF2-AC81-C2C130CCF0EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bussiness", "Bussiness\Bussiness.csproj", "{4E3D55B8-88AA-46B1-ADF5-5FEC764A9878}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{44A781D6-C1D0-4FC9-83B4-904A8C96712F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44A781D6-C1D0-4FC9-83B4-904A8C96712F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44A781D6-C1D0-4FC9-83B4-904A8C96712F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44A781D6-C1D0-4FC9-83B4-904A8C96712F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{973535B3-14DC-4DF2-AC81-C2C130CCF0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{973535B3-14DC-4DF2-AC81-C2C130CCF0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{973535B3-14DC-4DF2-AC81-C2C130CCF0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
