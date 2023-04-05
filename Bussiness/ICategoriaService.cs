@@ -12,7 +12,8 @@ namespace Bussiness
         IEnumerable<Categoria> GetAllCategorias();
         Categoria GetCategoria(int id);
         void AddCategoria(Categoria categoria);
-        void DeleteCategoria(int id);
-        void UpdateCategoria(Categoria categoria);
+        void DeleteCategoria(Categoria categoria);
+        void UpdateCategoria(int id, Categoria categoria);
+        bool CategoriaExists(int id);
     }
 }

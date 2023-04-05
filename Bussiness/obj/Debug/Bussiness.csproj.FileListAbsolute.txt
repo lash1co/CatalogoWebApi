@@ -11,3 +11,16 @@ C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CoreC
 C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CopyComplete
 C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.dll
 C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.pdb
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.AssemblyReference.cache
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CoreCompileInputs.cache
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.pdb
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\Bussiness.dll.config
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\Bussiness.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\Bussiness.pdb
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\DataAccess.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\DataAccess.pdb
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\DataAccess.dll.config
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.xml
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CopyComplete

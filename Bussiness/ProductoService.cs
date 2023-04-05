@@ -27,14 +27,10 @@ namespace Bussiness
             return _dbContext.Producto.Find(id);
         }
 
-        public void DeleteProducto(int id) 
+        public void DeleteProducto(Producto producto) 
         { 
-            var producto = GetProducto(id);
-            if(producto != null) 
-            {
                 _dbContext.Producto.Remove(producto);
                 _dbContext.SaveChanges();
-            } 
         }
 
         public void AddProducto(Producto producto) 
@@ -43,20 +39,24 @@ namespace Bussiness
             _dbContext.SaveChanges();
         }
 
-        public void UpdateProducto(Producto producto) 
+        public void UpdateProducto(int id, Producto producto) 
         {
-            var existingProducto = GetProducto(producto.Id);
+            var existingProducto = GetProducto(id);
             if (existingProducto != null) 
             { 
-                existingProducto.Nombre = producto.Nombre;
-                existingProducto.CategoriaId = producto.CategoriaId;
-                existingProducto.Descripcion= producto.Descripcion;
-                existingProducto.Imagen = producto.Imagen;
+                if(producto.Nombre != null)
+                    existingProducto.Nombre = producto.Nombre;
+                if(producto.CategoriaId != 0)
+                    existingProducto.CategoriaId = producto.CategoriaId;
+                if(producto.Descripcion != null)
+                    existingProducto.Descripcion= producto.Descripcion;
+                if(producto.Imagen != null)
+                    existingProducto.Imagen = producto.Imagen;
                 _dbContext.SaveChanges();
             }
         }
 
-        public IEnumerable<Producto> SearchProducto(string searchText) 
+        public IEnumerable<Producto> SearchProducto(string searchText, string order) 
         { 
             var productos = _dbContext.Producto.Include(p => p.Categoria).AsQueryable();
             if (!string.IsNullOrWhiteSpace(searchText))
@@ -65,7 +65,30 @@ namespace Bussiness
                                              || p.Descripcion.Contains(searchText)
                                              || p.Categoria.Nombre.Contains(searchText));
             }
+            switch (order)
+            {
+                case "name_asc":
+                    productos = productos.OrderBy(p => p.Nombre);
+                    break;
+                case "name_desc":
+                    productos = productos.OrderByDescending(p => p.Nombre);
+                    break;
+                case "category_asc":
+                    productos = productos.OrderBy(p => p.Categoria.Nombre);
+                    break;
+                case "category_desc":
+                    productos = productos.OrderByDescending(p => p.Categoria.Nombre);
+                    break;
+                default:
+                    productos = productos.OrderBy(p => p.Nombre);
+                    break;
+            }
             return productos.ToList();
+        }
+
+        public bool ProductoExists(int id)
+        {
+            return _dbContext.Producto.Count(p => p.Id == id) > 0;
         }
     }
 }

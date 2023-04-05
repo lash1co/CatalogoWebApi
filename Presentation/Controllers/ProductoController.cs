@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace Presentation.Controllers
 {
@@ -19,39 +21,82 @@ namespace Presentation.Controllers
         }
         
         //GET api/Producto
-        public IEnumerable<Producto> Get() 
-        { 
-            return _productoService.GetAllProductos();
-        }
+        //public IEnumerable<Producto> Get() 
+        //{ 
+        //    return _productoService.GetAllProductos();
+        //}
 
         //GET api/Producto/{id}
-        public Producto Get(int id) 
+        public IHttpActionResult Get(int id) 
         { 
-            return _productoService.GetProducto(id);
+            var producto = _productoService.GetProducto(id);
+            if(producto == null) 
+            { 
+                return NotFound();
+            }
+            else 
+            {
+                return Ok(producto);
+            }
         }
 
-        //GET api/Producto/string
-        public IEnumerable<Producto> Get(string _string = null) 
+        //GET api/Producto?q=null(name=Ideapad&description=Lenovo&category=Laptop)&order=name_asc
+        public IEnumerable<Producto> Get(string q = null, string order = null) 
         {
-            return _productoService.SearchProducto(_string);
+            return _productoService.SearchProducto(q, order);
         }
 
         //POST api/Producto
-        public void Post([FromBody] Producto producto) 
+        public IHttpActionResult Post([FromBody] Producto producto) 
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _productoService.AddProducto(producto);
+            return CreatedAtRoute("DefaultApi", new { id = producto.Id }, producto);
         }
 
         //PUT api/Producto
-        public void Put([FromBody] Producto producto) 
-        { 
-            _productoService.UpdateProducto(producto);
+        public IHttpActionResult Put(int id, [FromBody] Producto producto) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != producto.Id)
+            {
+                return BadRequest();
+            }
+            try 
+            {
+                _productoService.UpdateProducto(id, producto);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_productoService.ProductoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         //DELETE api/Producto/{id}
-        public void Delete(int id) 
+        public IHttpActionResult Delete(int id) 
         { 
-            _productoService.DeleteProducto(id);
+            var producto = _productoService.GetProducto(id);
+            if(producto == null) 
+            {
+                return NotFound();
+            }    
+            _productoService.DeleteProducto(producto);
+            return Ok(producto);
         }
     }
 }

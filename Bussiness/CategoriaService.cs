@@ -32,24 +32,25 @@ namespace Bussiness
             _dbContext.SaveChanges();
         }
 
-        public void DeleteCategoria(int id) 
+        public void DeleteCategoria(Categoria categoria) 
         { 
-            var categoria = GetCategoria(id); 
-            if(categoria != null) 
-            { 
-                _dbContext.Categoria.Remove(categoria);
-                _dbContext.SaveChanges();
-            }
+            _dbContext.Categoria.Remove(categoria);
+            _dbContext.SaveChanges();
         }
 
-        public void UpdateCategoria(Categoria categoria) 
+        public void UpdateCategoria(int id, Categoria categoria) 
         { 
-            var existingCategoria = GetCategoria(categoria.Id);
-            if(existingCategoria != null) 
+            var existingCategoria = GetCategoria(id);
+            if(existingCategoria != null && categoria.Nombre != null) 
             { 
                 existingCategoria.Nombre= categoria.Nombre;
                 _dbContext.SaveChanges();
             }
+        }
+
+        public bool CategoriaExists(int id)
+        {
+            return _dbContext.Categoria.Count(c => c.Id == id) > 0;
         }
     }
 }

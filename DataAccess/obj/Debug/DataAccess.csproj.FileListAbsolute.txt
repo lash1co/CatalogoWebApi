@@ -8,3 +8,13 @@ C:\Datos\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.csproj.Cor
 C:\Datos\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Datos\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.dll
 C:\Datos\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.pdb
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\bin\Debug\DataAccess.dll.config
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\bin\Debug\DataAccess.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\bin\Debug\DataAccess.pdb
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\bin\Debug\EntityFramework.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\bin\Debug\EntityFramework.xml
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\DataAccess\obj\Debug\DataAccess.pdb

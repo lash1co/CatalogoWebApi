@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "2e5eaa96-4abc-4fa8-9f30-8d8515594526",
+		"name": "CatalogoWebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12699032"
+	},
+	"item": [
+		{
+			"name": "Get Categorias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Categoria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Categoria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Categoria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"SmartTV\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:51277/api/Categoria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Categoria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Categoria",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Categoria/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Categoria",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Categoria",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Smart TV\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:51277/api/Categoria/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Categoria",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Categoria/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Categoria",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Tv Xiaomi 32''\",\r\n    \"Descripcion\": \"TV XIAOMI 32 Pulgadas 80 cm P1 HD LED Smart TV Android\",\r\n    \"CategoriaId\":3,\r\n    \"Imagen\":\"https://www.alkosto.com/medias/1400Wx1400H-master-hotfolder-transfer-incoming-deposit-hybris-interfaces-IN-media-product-6971408155507-001.jpg?context=bWFzdGVyfGltYWdlc3wzNjc2MzB8aW1hZ2UvanBlZ3xoODEvaGU0LzEzNzA0ODE1MjgwMTU4LzE0MDBXeDE0MDBIX21hc3Rlci9ob3Rmb2xkZXIvdHJhbnNmZXIvaW5jb21pbmcvZGVwb3NpdC9oeWJyaXMtaW50ZXJmYWNlcy9JTi9tZWRpYS9wcm9kdWN0LzY5NzE0MDgxNTU1MDdfMDAxLmpwZ3wxYzk0ZGFmMmM3Y2JhNGY2ODQxY2UzYzMxMjVhYWZlNzM2NzZiMWZlNzhlZDlkMzViYjU1NjBmOGI2NmZjYWMw\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:51277/api/Producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Descripcion\": \"El TV XIAOMI 32 pulgadas P1 ofrece un diseño sin biseles en tres lados para que puedas tener una visualización única, su diseño sofisticado y su base de alta calidad refuerza el concepto visual de alta definición con una experiencia visual más clara, envolvente y agradable, que te permitirán vivir experiencias únicas en el lugar donde estes. Gracias a la cómoda interfaz de Android TV 9, simplifica tu experiencia de entretenimiento, además, cuenta con control remoto con conectividad Bluetooth, activado por voz para un uso simple, vive la experiencia Xiaomi. ¡Ven por el tuyo!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:51277/api/Producto/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Producto",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Producto/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Producto",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Producto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Producto/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Producto",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:51277/api/Producto?q=Smart&order=name_asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51277",
+					"path": [
+						"api",
+						"Producto"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Smart"
+						},
+						{
+							"key": "order",
+							"value": "name_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

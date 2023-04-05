@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,27 +26,67 @@ namespace Presentation.Controllers
         }
 
         //GET api/Categoria/{id}
-        public Categoria Get(int id) 
+        public IHttpActionResult Get(int id) 
         {
-            return _categoriaService.GetCategoria(id);
+            var categoria = _categoriaService.GetCategoria(id);
+            if(categoria == null) 
+            {
+                return NotFound();
+            }
+            return Ok(categoria);
         }
 
         // POST api/Categoria
-        public void Post([FromBody] Categoria categoria)
+        public IHttpActionResult Post([FromBody] Categoria categoria)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _categoriaService.AddCategoria(categoria);
+            return CreatedAtRoute("DefaultApi", new { id = categoria.Id }, categoria);
         }
 
         // PUT api/Categoria/5
-        public void Put([FromBody] Categoria categoria)
+        public IHttpActionResult Put(int id, [FromBody] Categoria categoria)
         {
-            _categoriaService.UpdateCategoria(categoria);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != categoria.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _categoriaService.UpdateCategoria(id, categoria);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_categoriaService.CategoriaExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/Categoria/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            _categoriaService.DeleteCategoria(id);
+            var categoria = _categoriaService.GetCategoria(id);
+            if(categoria == null) 
+            {
+                return NotFound();
+            }
+            _categoriaService.DeleteCategoria(categoria);
+            return Ok(categoria);
         }
     }
 }
