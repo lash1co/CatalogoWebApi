@@ -1,0 +1,13 @@
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\Bussiness.dll.config
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\Bussiness.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\Bussiness.pdb
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\DataAccess.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\DataAccess.pdb
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\DataAccess.dll.config
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.xml
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.AssemblyReference.cache
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CoreCompileInputs.cache
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CopyComplete
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.pdb

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CatalogoWebApi.Models;
+using CatalogoWebApi.Servicios;
 
 namespace CatalogoWebApi.Controllers
 {
@@ -115,5 +116,41 @@ namespace CatalogoWebApi.Controllers
         {
             return db.Producto.Count(e => e.Id == id) > 0;
         }
+        //private readonly IProductoService _productoService;
+
+        //public ProductoController(IProductoService productoService)
+        //{
+        //    _productoService = productoService;
+        //}
+
+        //[HttpGet]
+        //public async Task<IEnumerable<Producto>> ObtenerProductos()
+        //{
+        //    return await _productoService.ObtenerProductos();
+        //}
+
+        //[HttpGet]
+        //public async Task<Producto> ObtenerProductoPorId(int id)
+        //{
+        //    return await _productoService.ObtenerProductoPorId(id);
+        //}
+
+        //[HttpPost]
+        //public async Task AgregarProducto(Producto producto)
+        //{
+        //    await _productoService.AgregarProducto(producto);
+        //}
+
+        //[HttpPut]
+        //public async Task ActualizarProducto(Producto producto)
+        //{
+        //    await _productoService.ActualizarProducto(producto);
+        //}
+
+        //[HttpDelete]
+        //public async Task EliminarProducto(int id)
+        //{
+        //    await _productoService.EliminarProducto(id);
+        //}
     }
 }

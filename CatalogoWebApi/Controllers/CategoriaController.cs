@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CatalogoWebApi.Models;
+using CatalogoWebApi.Servicios;
 
 namespace CatalogoWebApi.Controllers
 {
@@ -115,5 +116,41 @@ namespace CatalogoWebApi.Controllers
         {
             return db.Categoria.Count(e => e.Id == id) > 0;
         }
+        //private readonly ICategoriaService _categoriaService;
+
+        //public CategoriaController(ICategoriaService categoriaService)
+        //{
+        //    _categoriaService = categoriaService;
+        //}
+
+        //[HttpGet]
+        //public async Task<IEnumerable<Categoria>> ObtenerCategorias()
+        //{
+        //    return await _categoriaService.ObtenerCategorias();
+        //}
+
+        //[HttpGet]
+        //public async Task<Categoria> ObtenerCategoriaPorId(int id)
+        //{
+        //    return await _categoriaService.ObtenerCategoriaPorId(id);
+        //}
+
+        //[HttpPost]
+        //public async Task AgregarCategoria(Categoria categoria)
+        //{
+        //    await _categoriaService.AgregarCategoria(categoria);
+        //}
+
+        //[HttpPut]
+        //public async Task ActualizarCategoria(Categoria categoria)
+        //{
+        //    await _categoriaService.ActualizarCategoria(categoria);
+        //}
+
+        //[HttpDelete]
+        //public async Task EliminarCategoria(int id)
+        //{
+        //    await _categoriaService.EliminarCategoria(id);
+        //}
     }
 }

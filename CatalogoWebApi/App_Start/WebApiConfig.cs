@@ -1,7 +1,12 @@
-﻿using System;
+﻿using CatalogoWebApi.DataAccess;
+using CatalogoWebApi.Models;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Newtonsoft.Json;
+using CatalogoWebApi.Servicios;
 
 namespace CatalogoWebApi
 {
@@ -10,7 +15,9 @@ namespace CatalogoWebApi
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de Web API
-
+            //
+            // Configuración del manejo de excepciones
+            //config.Filters.Add(new ExceptionHandlingAttribute());
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
 
@@ -19,6 +26,11 @@ namespace CatalogoWebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //// Formato de respuestas JSON
+            //config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+            //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
