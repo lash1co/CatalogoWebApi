@@ -9,12 +9,11 @@ namespace Bussiness
 {
     public interface IProductoService
     {
-        IEnumerable<Producto> GetAllProductos();
         Producto GetProducto(int id);
         void DeleteProducto(Producto producto);
         void AddProducto(Producto producto);
         void UpdateProducto(int id, Producto producto);
-        IEnumerable<Producto> SearchProducto(string searchText, string order);
+        IEnumerable<Producto> GetAllProductos(string searchText, string order);
         bool ProductoExists(int id);
     }
 }

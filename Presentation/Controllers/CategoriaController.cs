@@ -28,12 +28,19 @@ namespace Presentation.Controllers
         //GET api/Categoria/{id}
         public IHttpActionResult Get(int id) 
         {
-            var categoria = _categoriaService.GetCategoria(id);
-            if(categoria == null) 
+            try 
             {
-                return NotFound();
+                var categoria = _categoriaService.GetCategoria(id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+                return Ok(categoria);
             }
-            return Ok(categoria);
+            catch(Exception ex) 
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // POST api/Categoria
@@ -43,8 +50,15 @@ namespace Presentation.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _categoriaService.AddCategoria(categoria);
-            return CreatedAtRoute("DefaultApi", new { id = categoria.Id }, categoria);
+            try 
+            {
+                _categoriaService.AddCategoria(categoria);
+                return CreatedAtRoute("DefaultApi", new { id = categoria.Id }, categoria);
+            }
+            catch(Exception ex) 
+            {
+                return InternalServerError(ex);
+            }  
         }
 
         // PUT api/Categoria/5
@@ -74,19 +88,27 @@ namespace Presentation.Controllers
                     throw;
                 }
             }
-            return StatusCode(HttpStatusCode.NoContent);
+            //return StatusCode(HttpStatusCode.NoContent);
+            return Ok($"Categoria {id}  modificada");
         }
 
         // DELETE api/Categoria/5
         public IHttpActionResult Delete(int id)
         {
-            var categoria = _categoriaService.GetCategoria(id);
-            if(categoria == null) 
+            try 
             {
-                return NotFound();
+                var categoria = _categoriaService.GetCategoria(id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+                _categoriaService.DeleteCategoria(categoria);
+                return Ok(categoria);
             }
-            _categoriaService.DeleteCategoria(categoria);
-            return Ok(categoria);
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }

@@ -19,31 +19,32 @@ namespace Presentation.Controllers
         {
             _productoService = productoService;
         }
-        
-        //GET api/Producto
-        //public IEnumerable<Producto> Get() 
-        //{ 
-        //    return _productoService.GetAllProductos();
-        //}
 
         //GET api/Producto/{id}
-        public IHttpActionResult Get(int id) 
-        { 
-            var producto = _productoService.GetProducto(id);
-            if(producto == null) 
-            { 
-                return NotFound();
-            }
-            else 
+        public IHttpActionResult Get(int id)
+        {
+            try
             {
-                return Ok(producto);
+                var producto = _productoService.GetProducto(id);
+                if (producto == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(producto);
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
             }
         }
 
         //GET api/Producto?q=null(name=Ideapad&description=Lenovo&category=Laptop)&order=name_asc
         public IEnumerable<Producto> Get(string q = null, string order = null) 
         {
-            return _productoService.SearchProducto(q, order);
+            return _productoService.GetAllProductos(q, order);
         }
 
         //POST api/Producto
@@ -53,8 +54,15 @@ namespace Presentation.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _productoService.AddProducto(producto);
-            return CreatedAtRoute("DefaultApi", new { id = producto.Id }, producto);
+            try 
+            {
+                _productoService.AddProducto(producto);
+                return CreatedAtRoute("DefaultApi", new { id = producto.Id }, producto);
+            }
+            catch(Exception ex) 
+            { 
+                return InternalServerError(ex);
+            }
         }
 
         //PUT api/Producto
@@ -84,19 +92,27 @@ namespace Presentation.Controllers
                     throw;
                 }
             }
-            return StatusCode(HttpStatusCode.NoContent);
+            //return StatusCode(HttpStatusCode.NoContent);
+            return Ok($"Producto {id}  modificado");
         }
 
         //DELETE api/Producto/{id}
-        public IHttpActionResult Delete(int id) 
-        { 
-            var producto = _productoService.GetProducto(id);
-            if(producto == null) 
+        public IHttpActionResult Delete(int id)
+        {
+            try 
             {
-                return NotFound();
-            }    
-            _productoService.DeleteProducto(producto);
-            return Ok(producto);
+                var producto = _productoService.GetProducto(id);
+                if (producto == null)
+                {
+                    return NotFound();
+                }
+                _productoService.DeleteProducto(producto);
+                return Ok(producto);
+            }
+            catch(Exception ex) 
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }

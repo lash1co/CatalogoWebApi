@@ -17,11 +17,6 @@ namespace Bussiness
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Producto> GetAllProductos() 
-        {
-            return _dbContext.Producto.ToList();
-        }
-
         public Producto GetProducto(int id) 
         { 
             return _dbContext.Producto.Find(id);
@@ -56,7 +51,7 @@ namespace Bussiness
             }
         }
 
-        public IEnumerable<Producto> SearchProducto(string searchText, string order) 
+        public IEnumerable<Producto> GetAllProductos(string searchText, string order) 
         { 
             var productos = _dbContext.Producto.Include(p => p.Categoria).AsQueryable();
             if (!string.IsNullOrWhiteSpace(searchText))
