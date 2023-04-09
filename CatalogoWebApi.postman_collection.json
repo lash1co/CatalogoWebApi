@@ -183,7 +183,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Descripcion\": \"El TV XIAOMI 32 pulgadas P1 ofrece un diseño sin biseles en tres lados para que puedas tener una visualización única, su diseño sofisticado y su base de alta calidad refuerza el concepto visual de alta definición con una experiencia visual más clara, envolvente y agradable, que te permitirán vivir experiencias únicas en el lugar donde estes. Gracias a la cómoda interfaz de Android TV 9, simplifica tu experiencia de entretenimiento, además, cuenta con control remoto con conectividad Bluetooth, activado por voz para un uso simple, vive la experiencia Xiaomi. ¡Ven por el tuyo!\"\r\n}",
+					"raw": "{\r\n    \"Id\":3,\r\n    \"Descripcion\": \"El TV XIAOMI 32 \\\" P1 ofrece un diseño sin biseles en tres lados para que puedas tener una visualización única, su diseño sofisticado y su base de alta calidad refuerza el concepto visual de alta definición con una experiencia visual más clara, envolvente y agradable, que te permitirán vivir experiencias únicas en el lugar donde estes. Gracias a la cómoda interfaz de Android TV 9, simplifica tu experiencia de entretenimiento, además, cuenta con control remoto con conectividad Bluetooth, activado por voz para un uso simple, vive la experiencia Xiaomi. ¡Ven por el tuyo!\",\r\n    \"CategoriaId\": 3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,41 +17,41 @@ namespace Bussiness
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Categoria> GetAllCategorias() 
+        public async Task<IEnumerable<Categoria>> GetAllCategorias() 
         { 
-            return _dbContext.Categoria.ToList();
+            return await _dbContext.Categoria.ToListAsync();
         }
 
-        public Categoria GetCategoria(int id) 
+        public async Task<Categoria> GetCategoria(int id) 
         { 
-            return _dbContext.Categoria.Find(id);
+            return await _dbContext.Categoria.FindAsync(id);
         }
 
-        public void AddCategoria(Categoria categoria) 
+        public async Task AddCategoria(Categoria categoria) 
         { 
             _dbContext.Categoria.Add(categoria);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void DeleteCategoria(Categoria categoria) 
+        public async Task DeleteCategoria(Categoria categoria) 
         { 
             _dbContext.Categoria.Remove(categoria);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void UpdateCategoria(int id, Categoria categoria) 
+        public async Task UpdateCategoria(int id, Categoria categoria) 
         { 
-            var existingCategoria = GetCategoria(id);
-            if(existingCategoria != null && categoria.Nombre != null) 
+            var existingCategoria = await GetCategoria(id);
+            if(existingCategoria != null && categoria.Nombre != null && categoria.Nombre.Trim() != "") 
             { 
                 existingCategoria.Nombre= categoria.Nombre;
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        public bool CategoriaExists(int id)
+        public async Task<bool> CategoriaExists(int id)
         {
-            return _dbContext.Categoria.Count(c => c.Id == id) > 0;
+            return await _dbContext.Categoria.CountAsync(c => c.Id == id) > 0;
         }
     }
 }

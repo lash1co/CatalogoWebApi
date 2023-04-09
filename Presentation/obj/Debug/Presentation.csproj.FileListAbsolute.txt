@@ -270,3 +270,8 @@ C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\obj\Debug\Presentation.c
 C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\obj\Debug\Presentation.csproj.CopyComplete
 C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\obj\Debug\Presentation.dll
 C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\obj\Debug\Presentation.pdb
+C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\EntityFramework.SqlServer.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\EntityFramework.SqlServer.xml
+C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Cors.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Http.Cors.dll
+C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Http.Cors.xml

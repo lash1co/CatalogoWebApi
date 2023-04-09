@@ -8,24 +8,27 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
     public class ProductoController : ApiController
     {
         private readonly IProductoService _productoService;
+        private readonly ICategoriaService _categoriaService;
 
-        public ProductoController(IProductoService productoService)
+        public ProductoController(IProductoService productoService, ICategoriaService categoriaService)
         {
             _productoService = productoService;
+            _categoriaService= categoriaService;
         }
 
         //GET api/Producto/{id}
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             try
             {
-                var producto = _productoService.GetProducto(id);
+                var producto = await _productoService.GetProducto(id);
                 if (producto == null)
                 {
                     return NotFound();
@@ -42,21 +45,30 @@ namespace Presentation.Controllers
         }
 
         //GET api/Producto?q=null(name=Ideapad&description=Lenovo&category=Laptop)&order=name_asc
-        public IEnumerable<Producto> Get(string q = null, string order = null) 
+        public async Task<IEnumerable<Producto>> Get(string q = null, string order = null) 
         {
-            return _productoService.GetAllProductos(q, order);
+            return await _productoService.GetAllProductos(q, order);
         }
 
         //POST api/Producto
-        public IHttpActionResult Post([FromBody] Producto producto) 
+        public async Task<IHttpActionResult> Post([FromBody] Producto producto) 
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errorMessage = ModelState.Values.FirstOrDefault(v => v.Errors.Any())?.Errors.FirstOrDefault()?.ErrorMessage;
+                return BadRequest(errorMessage ?? "Modelo no válido!.");
+            }
+            if (producto?.CategoriaId == 0 || string.IsNullOrEmpty(producto?.Nombre?.Trim()) || string.IsNullOrEmpty(producto?.Descripcion?.Trim()) || string.IsNullOrEmpty(producto?.Imagen?.Trim()))
+            {
+                return BadRequest("El producto no tiene definido correctamente uno o varios de sus parametros (Nombre, Descripcion, Imagen, CategoriaId)");
             }
             try 
             {
-                _productoService.AddProducto(producto);
+                if(!await _categoriaService.CategoriaExists(producto.CategoriaId)) 
+                {
+                    return BadRequest("La categoria vinculada al producto no existe.");
+                }
+                await _productoService.AddProducto(producto);
                 return CreatedAtRoute("DefaultApi", new { id = producto.Id }, producto);
             }
             catch(Exception ex) 
@@ -66,47 +78,57 @@ namespace Presentation.Controllers
         }
 
         //PUT api/Producto
-        public IHttpActionResult Put(int id, [FromBody] Producto producto) 
+        public async Task<IHttpActionResult> Put(int id, [FromBody] Producto producto) 
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || (producto?.Nombre == null && producto?.Descripcion == null && producto?.Imagen == null) || id == 0 || producto?.Id == 0)
             {
-                return BadRequest(ModelState);
+                var errorMessage = ModelState.Values.FirstOrDefault(v => v.Errors.Any())?.Errors.FirstOrDefault()?.ErrorMessage;
+                return BadRequest(errorMessage ?? "Modelo no válido!. El Id del producto y/o el modelo no tiene parametros o está nulo.");
+            }
+            if (producto?.CategoriaId == 0 || (producto?.Nombre?.Trim() == "" && producto?.Descripcion?.Trim() == "" && producto?.Imagen?.Trim() == ""))
+            {
+                return BadRequest("La categoria del producto esta mal definida y/o todos los otros parametros estan vacíos.");
             }
 
             if (id != producto.Id)
             {
-                return BadRequest();
+                return BadRequest("El Id no coincide con el del modelo");
             }
             try 
             {
-                _productoService.UpdateProducto(id, producto);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_productoService.ProductoExists(id))
+                if (!await _productoService.ProductoExists(id))
                 {
                     return NotFound();
                 }
-                else
+                if (!await _categoriaService.CategoriaExists(producto.CategoriaId))
                 {
-                    throw;
+                    return BadRequest("La categoria vinculada al producto no existe.");
                 }
+                await _productoService.UpdateProducto(id, producto);
+                return Ok($"Producto {id}  modificado");
             }
-            //return StatusCode(HttpStatusCode.NoContent);
-            return Ok($"Producto {id}  modificado");
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(HttpStatusCode.Conflict);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
 
         //DELETE api/Producto/{id}
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             try 
             {
-                var producto = _productoService.GetProducto(id);
+                var producto = await _productoService.GetProducto(id);
                 if (producto == null)
                 {
                     return NotFound();
                 }
-                _productoService.DeleteProducto(producto);
+                await _productoService.DeleteProducto(producto);
                 return Ok(producto);
             }
             catch(Exception ex) 

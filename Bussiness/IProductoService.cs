@@ -9,11 +9,11 @@ namespace Bussiness
 {
     public interface IProductoService
     {
-        Producto GetProducto(int id);
-        void DeleteProducto(Producto producto);
-        void AddProducto(Producto producto);
-        void UpdateProducto(int id, Producto producto);
-        IEnumerable<Producto> GetAllProductos(string searchText, string order);
-        bool ProductoExists(int id);
+        Task<Producto> GetProducto(int id);
+        Task DeleteProducto(Producto producto);
+        Task AddProducto(Producto producto);
+        Task UpdateProducto(int id, Producto producto);
+        Task<IEnumerable<Producto>> GetAllProductos(string searchText, string order);
+        Task<bool> ProductoExists(int id);
     }
 }

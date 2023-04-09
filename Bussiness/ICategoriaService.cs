@@ -9,11 +9,11 @@ namespace Bussiness
 {
     public interface ICategoriaService
     {
-        IEnumerable<Categoria> GetAllCategorias();
-        Categoria GetCategoria(int id);
-        void AddCategoria(Categoria categoria);
-        void DeleteCategoria(Categoria categoria);
-        void UpdateCategoria(int id, Categoria categoria);
-        bool CategoriaExists(int id);
+        Task<IEnumerable<Categoria>> GetAllCategorias();
+        Task<Categoria> GetCategoria(int id);
+        Task AddCategoria(Categoria categoria);
+        Task DeleteCategoria(Categoria categoria);
+        Task UpdateCategoria(int id, Categoria categoria);
+        Task<bool> CategoriaExists(int id);
     }
 }

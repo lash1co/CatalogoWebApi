@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,41 +18,41 @@ namespace Bussiness
             _dbContext = dbContext;
         }
 
-        public Producto GetProducto(int id) 
+        public async Task<Producto> GetProducto(int id) 
         { 
-            return _dbContext.Producto.Find(id);
+            return await _dbContext.Producto.FindAsync(id);
         }
 
-        public void DeleteProducto(Producto producto) 
+        public async Task DeleteProducto(Producto producto) 
         { 
                 _dbContext.Producto.Remove(producto);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
         }
 
-        public void AddProducto(Producto producto) 
+        public async Task AddProducto(Producto producto) 
         { 
             _dbContext.Producto.Add(producto);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void UpdateProducto(int id, Producto producto) 
+        public async Task UpdateProducto(int id, Producto producto) 
         {
-            var existingProducto = GetProducto(id);
+            var existingProducto = await GetProducto(id);
             if (existingProducto != null) 
             { 
-                if(producto.Nombre != null)
+                if(producto.Nombre != null && producto.Nombre.Trim() != "")
                     existingProducto.Nombre = producto.Nombre;
                 if(producto.CategoriaId != 0)
                     existingProducto.CategoriaId = producto.CategoriaId;
-                if(producto.Descripcion != null)
+                if(producto.Descripcion != null && producto.Descripcion.Trim() != "")
                     existingProducto.Descripcion= producto.Descripcion;
-                if(producto.Imagen != null)
+                if(producto.Imagen != null && producto.Imagen.Trim() != "")
                     existingProducto.Imagen = producto.Imagen;
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        public IEnumerable<Producto> GetAllProductos(string searchText, string order) 
+        public async Task<IEnumerable<Producto>> GetAllProductos(string searchText, string order) 
         { 
             var productos = _dbContext.Producto.Include(p => p.Categoria).AsQueryable();
             if (!string.IsNullOrWhiteSpace(searchText))
@@ -78,12 +79,12 @@ namespace Bussiness
                     productos = productos.OrderBy(p => p.Nombre);
                     break;
             }
-            return productos.ToList();
+            return await productos.ToListAsync();
         }
 
-        public bool ProductoExists(int id)
+        public async Task<bool> ProductoExists(int id)
         {
-            return _dbContext.Producto.Count(p => p.Id == id) > 0;
+            return await _dbContext.Producto.CountAsync(p => p.Id == id) > 0;
         }
     }
 }

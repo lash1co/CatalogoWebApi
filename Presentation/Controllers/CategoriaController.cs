@@ -4,6 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Bussiness;
 using DataAccess;
@@ -20,17 +21,17 @@ namespace Presentation.Controllers
         }
 
         //GET api/Categoria
-        public IEnumerable<Categoria> Get() 
+        public async Task<IEnumerable<Categoria>> Get() 
         {
-            return _categoriaService.GetAllCategorias();
+            return await _categoriaService.GetAllCategorias();
         }
 
         //GET api/Categoria/{id}
-        public IHttpActionResult Get(int id) 
+        public async Task<IHttpActionResult> Get(int id) 
         {
             try 
             {
-                var categoria = _categoriaService.GetCategoria(id);
+                var categoria = await _categoriaService.GetCategoria(id);
                 if (categoria == null)
                 {
                     return NotFound();
@@ -44,15 +45,21 @@ namespace Presentation.Controllers
         }
 
         // POST api/Categoria
-        public IHttpActionResult Post([FromBody] Categoria categoria)
+        public async Task<IHttpActionResult> Post([FromBody] Categoria categoria)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errorMessage = ModelState.Values.FirstOrDefault(v => v.Errors.Any())?.Errors.FirstOrDefault()?.ErrorMessage;
+                return BadRequest(errorMessage ?? "Modelo no válido!.");
+            }
+
+            if (string.IsNullOrEmpty(categoria?.Nombre?.Trim()))
+            {
+                return BadRequest("La categoria debe tener un nombre y no debe estar vacío.");
             }
             try 
             {
-                _categoriaService.AddCategoria(categoria);
+                await _categoriaService.AddCategoria(categoria);
                 return CreatedAtRoute("DefaultApi", new { id = categoria.Id }, categoria);
             }
             catch(Exception ex) 
@@ -62,47 +69,48 @@ namespace Presentation.Controllers
         }
 
         // PUT api/Categoria/5
-        public IHttpActionResult Put(int id, [FromBody] Categoria categoria)
+        public async Task<IHttpActionResult> Put(int id, [FromBody] Categoria categoria)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || categoria?.Nombre == null || id == 0 || categoria?.Id == 0)
             {
-                return BadRequest(ModelState);
+                return BadRequest("modelo inválido! Id o Nombre no son válidos.");
             }
 
-            if (id != categoria.Id)
+            if (id != categoria?.Id || categoria?.Nombre.Trim() == "")
             {
-                return BadRequest();
+                return BadRequest("El Id de la categoria no coincide con el del modelo y/o el nombre de la categoria está vacío.");
             }
             try
             {
-                _categoriaService.UpdateCategoria(id, categoria);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_categoriaService.CategoriaExists(id))
+                if (!await _categoriaService.CategoriaExists(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                await _categoriaService.UpdateCategoria(id, categoria);
+                return Ok($"Categoria {id}  modificada");
             }
-            //return StatusCode(HttpStatusCode.NoContent);
-            return Ok($"Categoria {id}  modificada");
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(HttpStatusCode.Conflict);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
 
         // DELETE api/Categoria/5
-        public IHttpActionResult Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
             try 
             {
-                var categoria = _categoriaService.GetCategoria(id);
+                var categoria = await _categoriaService.GetCategoria(id);
                 if (categoria == null)
                 {
                     return NotFound();
                 }
-                _categoriaService.DeleteCategoria(categoria);
+                await _categoriaService.DeleteCategoria(categoria);
                 return Ok(categoria);
             }
             catch (Exception ex)
