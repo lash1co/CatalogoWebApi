@@ -275,3 +275,8 @@ C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\EntityFramework.SqlServer
 C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Cors.dll
 C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Http.Cors.dll
 C:\Datos\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Http.Cors.xml
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\bin\EntityFramework.SqlServer.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Cors.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Http.Cors.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\bin\EntityFramework.SqlServer.xml
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Presentation\bin\System.Web.Http.Cors.xml

@@ -72,6 +72,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\PaginationInfo.cs" />
+    <Compile Include="Modelo\Response.cs" />
     <Compile Include="Producto.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>

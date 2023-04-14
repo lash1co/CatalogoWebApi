@@ -1,10 +1,12 @@
 ﻿using DataAccess;
+using DataAccess.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,7 +54,7 @@ namespace Bussiness
             }
         }
 
-        public async Task<IEnumerable<Producto>> GetAllProductos(string searchText, string order) 
+        public async Task<Response> GetAllProductos(string searchText=null, string order = null, int page=1, int pageSize = 10) 
         { 
             var productos = _dbContext.Producto.Include(p => p.Categoria).AsQueryable();
             if (!string.IsNullOrWhiteSpace(searchText))
@@ -79,7 +81,11 @@ namespace Bussiness
                     productos = productos.OrderBy(p => p.Nombre);
                     break;
             }
-            return await productos.ToListAsync();
+            productos = productos.Skip(pageSize*(page-1)).Take(pageSize);
+            var listProductos = await productos.ToListAsync();
+            var totalProductos = listProductos.Count();
+            var response = new Response(listProductos, page,totalProductos,pageSize);
+            return response;
         }
 
         public async Task<bool> ProductoExists(int id)

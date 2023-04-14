@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Presentation.Controllers
 {
@@ -45,9 +46,13 @@ namespace Presentation.Controllers
         }
 
         //GET api/Producto?q=null(name=Ideapad&description=Lenovo&category=Laptop)&order=name_asc
-        public async Task<IEnumerable<Producto>> Get(string q = null, string order = null) 
+        public async Task<IHttpActionResult> Get(string q=null, string order = null, int page = 1, int pageSize = 10) 
         {
-            return await _productoService.GetAllProductos(q, order);
+            if(page <= 0 || pageSize <= 0)
+            {
+                return BadRequest("El valor de pagina o el tamaño de la página no debe ser menor a 1");
+            }
+            return Ok(await _productoService.GetAllProductos(q, order, page, pageSize));
         }
 
         //POST api/Producto

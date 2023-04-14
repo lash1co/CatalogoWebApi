@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Bussiness
         Task DeleteProducto(Producto producto);
         Task AddProducto(Producto producto);
         Task UpdateProducto(int id, Producto producto);
-        Task<IEnumerable<Producto>> GetAllProductos(string searchText, string order);
+        Task<Response> GetAllProductos(string searchText, string order, int page, int numberProducts);
         Task<bool> ProductoExists(int id);
     }
 }

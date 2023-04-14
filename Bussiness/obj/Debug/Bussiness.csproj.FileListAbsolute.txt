@@ -26,3 +26,5 @@ C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.x
 C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\obj\Debug\Bussiness.csproj.CopyComplete
 C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.SqlServer.dll
 C:\Datos\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.SqlServer.xml
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.SqlServer.dll
+C:\DATOS\2023\Visual Studio\CatalogoWebApi\Bussiness\bin\Debug\EntityFramework.SqlServer.xml
