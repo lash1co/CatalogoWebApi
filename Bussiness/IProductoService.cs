@@ -14,7 +14,7 @@ namespace Bussiness
         Task DeleteProducto(Producto producto);
         Task AddProducto(Producto producto);
         Task UpdateProducto(int id, Producto producto);
-        Task<Response> GetAllProductos(string searchText, string order, int page, int numberProducts);
+        Task<ProductoResponse> GetAllProductos(string searchText, string order, int page, int numberProducts);
         Task<bool> ProductoExists(int id);
     }
 }

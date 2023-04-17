@@ -54,7 +54,7 @@ namespace Bussiness
             }
         }
 
-        public async Task<Response> GetAllProductos(string searchText=null, string order = null, int page=1, int pageSize = 10) 
+        public async Task<ProductoResponse> GetAllProductos(string searchText=null, string order = null, int page=1, int pageSize = 10) 
         { 
             var productos = _dbContext.Producto.Include(p => p.Categoria).AsQueryable();
             if (!string.IsNullOrWhiteSpace(searchText))
@@ -81,10 +81,10 @@ namespace Bussiness
                     productos = productos.OrderBy(p => p.Nombre);
                     break;
             }
-            productos = productos.Skip(pageSize*(page-1)).Take(pageSize);
+            var totalProductos = await productos.CountAsync();
+            productos = productos.Skip(pageSize * (page - 1)).Take(pageSize);
             var listProductos = await productos.ToListAsync();
-            var totalProductos = listProductos.Count();
-            var response = new Response(listProductos, page,totalProductos,pageSize);
+            var response = new ProductoResponse(listProductos, page,pageSize,totalProductos);
             return response;
         }
 
