@@ -45,14 +45,23 @@ namespace Presentation.Controllers
             }
         }
 
-        //GET api/Producto?q=null(name=Ideapad&description=Lenovo&category=Laptop)&order=name_asc
-        public async Task<IHttpActionResult> Get(string q=null, string order = null, int page = 1, int pageSize = 10) 
+        //GET api/Producto?q=null(name=Ideapad&description=Lenovo&category=Laptop)&order=name_asc&page=1&pageSize=10
+        public async Task<IHttpActionResult> Get(string q, string order, string page, string pageSize) 
         {
-            if(page <= 0 || pageSize <= 0)
+            bool pageIsNumber = int.TryParse(page, out var intPage);
+            bool pageSizeIsNumber = int.TryParse(pageSize, out var intPageSize);
+
+            if (!pageIsNumber || !pageSizeIsNumber)
             {
-                return BadRequest("El valor de pagina o el tamaño de la página no debe ser menor a 1");
+                return BadRequest("El valor de página y del tamaño de la página debe ser númerico");
             }
-            return Ok(await _productoService.GetAllProductos(q, order, page, pageSize));
+
+            if (intPage < 1 || intPageSize < 1)
+            {
+                return BadRequest("El valor de página o del tamaño de la página no debe ser menor a 1");
+            }
+
+            return Ok(await _productoService.GetAllProductos(q, order, intPage, intPageSize));
         }
 
         //POST api/Producto

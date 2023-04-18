@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Bussiness;
 using DataAccess;
+using DataAccess.Modelo;
 
 namespace Presentation.Controllers
 {
@@ -20,10 +21,23 @@ namespace Presentation.Controllers
             _categoriaService = categoriaService;
         }
 
-        //GET api/Categoria
-        public async Task<IEnumerable<Categoria>> Get() 
+        //GET api/Categoria?page=1&pageSize=10
+        public async Task<IHttpActionResult> Get(string page,string pageSize) 
         {
-            return await _categoriaService.GetAllCategorias();
+            bool pageIsNumber = int.TryParse(page, out var intPage);
+            bool pageSizeIsNumber = int.TryParse(pageSize, out var intPageSize);
+
+            if (!pageIsNumber  || !pageSizeIsNumber)
+            {
+                return BadRequest("El valor de página y del tamaño de la página debe ser númerico");
+            }
+
+            if (intPage < 1 || intPageSize < 1)
+            {
+                return BadRequest("El valor de página o del tamaño de la página no debe ser menor a 1");
+            }
+
+            return Ok(await _categoriaService.GetAllCategorias(intPage,intPageSize));
         }
 
         //GET api/Categoria/{id}

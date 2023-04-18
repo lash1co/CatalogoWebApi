@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,9 +18,15 @@ namespace Bussiness
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Categoria>> GetAllCategorias() 
-        { 
-            return await _dbContext.Categoria.ToListAsync();
+        public async Task<CategoriaResponse> GetAllCategorias(int page = 1, int pageSize = 10) 
+        {
+            var categorias = _dbContext.Categoria.OrderBy(c=>c.Id).AsQueryable();
+            var totalCategorias = await categorias.CountAsync();
+            categorias = categorias.Skip(pageSize * (page - 1)).Take(pageSize);
+            var listCategorias = await categorias.ToListAsync();
+            var response = new CategoriaResponse(listCategorias, page, pageSize, totalCategorias);
+            return response;
+
         }
 
         public async Task<Categoria> GetCategoria(int id) 

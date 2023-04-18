@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Bussiness
 {
     public interface ICategoriaService
     {
-        Task<IEnumerable<Categoria>> GetAllCategorias();
+        Task<CategoriaResponse> GetAllCategorias(int page, int numberCategorias);
         Task<Categoria> GetCategoria(int id);
         Task AddCategoria(Categoria categoria);
         Task DeleteCategoria(Categoria categoria);
